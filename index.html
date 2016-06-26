@@ -78,7 +78,7 @@
                 <div class="intro-text">
                     <span class="name">Seattle's Top Startups</span>
                     <hr class="star-light">
-                    <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    <span class="skills"></span>
                 </div>
             </div>
         </div>
@@ -108,36 +108,36 @@
         <!--</div>-->
         <div class="row">
             <div class="col-sm-0 col-lg-2"></div>
-            <div class="col-sm-12 col-lg-8">
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row">
-                            <!--logo-->
-                            <div class="col-sm-3">
-                                logo
-                            </div>
-                            <!--logo-->
-                            <div class="col-sm-4">
-                                <span class="company-name">Fiddlr kjrgdkshgdfhj</span>
-                            </div>
-                            <!--logo-->
-                            <div class="col-sm-3">
-                                <span class="company-site">Visit Website</span>
-                            </div>
-                            <!--logo-->
-                            <div class="col-sm-2">
-                                <span class="rank">1</span>
-                            </div>
+            <div class="col-sm-12 col-lg-8" id="startup-list">
+                <!--<div class="list-group">-->
+                    <!--<div class="list-group-item">-->
+                        <!--<div class="row">-->
+                            <!--&lt;!&ndash;logo&ndash;&gt;-->
+                            <!--<div class="col-sm-3">-->
+                                <!--logo-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;logo&ndash;&gt;-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<span class="company-name">Fiddlr kjrgdkshgdfhj</span>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;logo&ndash;&gt;-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<span class="company-site">Visit Website</span>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;logo&ndash;&gt;-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<span class="rank">1</span>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        test
-                    </div>
-                    <div class="list-group-item">
-                        test
-                    </div>
-                </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="list-group-item">-->
+                        <!--test-->
+                    <!--</div>-->
+                    <!--<div class="list-group-item">-->
+                        <!--test-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
@@ -223,6 +223,38 @@
     <!--</div>-->
 <!--</section>-->
 
+<script type="text/javascript">
+    window.onload = function() { init() };
+
+    var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1P9h67B9Te1izPP2PUYlDn2cTe2Z4egy8kN0YWxN1jfc/pubhtml';
+
+    function init() {
+        Tabletop.init( { key: public_spreadsheet_url,
+            callback: showData,
+            simpleSheet: true } )
+    }
+
+    function showData(data, tabletop) {
+        //JSON.stringify(data)
+
+        var $table = $( "<div class='list-group'></div>" );
+
+        for ( var i = 0; i < data.length; i++ ) {
+            var comp = data[i];
+            var $line = $( "<div class='list-group-item'></div>" );
+            var $line_row = $( "<div class='row'></div>" );
+            $line.append($line_row);
+
+            $line_row.append( $( "<div class='col-sm-3'></div>" ).html( "<img src='"+comp.logo+"' style='height:6em'>" ) );
+            $line_row.append( $( "<div class='col-sm-4'></div>" ).html( "<span class='company-name'>"+comp.name +"</span>") );
+            $line_row.append( $( "<div class='col-sm-3'></div>" ).html( "<a href='"+comp.blog+"'>Website</a>" ) );
+            $line_row.append( $( "<div class='col-sm-2'></div>" ).html( "<span class='rank'>"+comp.rank+"</span>" ) );
+            $table.append( $line );
+        }
+        $table.appendTo( $( "#startup-list" ) );
+    }
+</script>
+
 <!-- Footer -->
 <footer class="text-center">
     <div class="footer-above">
@@ -253,8 +285,9 @@
                     </ul>
                 </div>
                 <div class="footer-col col-md-4">
-                    <h3>About Freelancer</h3>
-                    <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    <h3>About Seattle Rank</h3>
+                    <p>Lorem ipsum dolor sit amet, per in vivendo voluptua insolens. Ullum cetero liberavisse
+                        ne pri, nam eu moderatius argumentum elaboraret, ne eam augue partem disputando.</p>
                 </div>
             </div>
         </div>
@@ -518,6 +551,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
+
+<!-- Google Sheets Integration  -->
+<script src="js/tabletop.js"></script>
 
 </body>
 
