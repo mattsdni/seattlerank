@@ -246,9 +246,9 @@
             $line.append($line_row);
 
             $line_row.append( $( "<div class='col-sm-3'></div>" ).html( "<img src='"+comp.logo+"' style='height:6em'>" ) );
-            $line_row.append( $( "<div class='col-sm-4'></div>" ).html( "<span class='company-name'>"+comp.name +"</span>") );
-            $line_row.append( $( "<div class='col-sm-3'></div>" ).html( "<a href='"+comp.blog+"'>Website</a>" ) );
-            $line_row.append( $( "<div class='col-sm-2'></div>" ).html( "<span class='rank'>"+comp.rank+"</span>" ) );
+            $line_row.append( $( "<div class='col-sm-4' style='padding-top: 2rem;'></div>" ).html( "<span class='company-name'>"+comp.name +"</span>") );
+            $line_row.append( $( "<div class='col-sm-3' style='padding-top: 3rem;'></div>" ).html( "<a href='"+comp.blog+"'>Website</a>" ) );
+            $line_row.append( $( "<div class='col-sm-2' style='padding-top: 2rem;'></div>" ).html( "<span class='rank'>"+comp.rank+"</span>" ) );
             $table.append( $line );
         }
         $table.appendTo( $( "#startup-list" ) );
