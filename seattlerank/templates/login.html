@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
+
+{% block title %}
+Houseme -- Login
+{% endblock %}
+
+{% block content %}
+<section>
+    <h1 style="clear:both">Please Login</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username, size=50) }}
+        {{ render_field(form.password, size=50) }}
+        {{ render_field(form.remember_me) }}
+        {{ render_field(form.submit) }}
+    </form>
+</section>
+
+
+{% endblock %}

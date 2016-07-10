@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Houseme -- Account: {{ user.username }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>Bookmarks for {{  user.username }}</h1>
+
+            {% if user.bookmarks.count > 0 %}
+                {% with bookmarks=user.bookmarks %}
+                    {% include "bookmark_list.html" %}
+                {% endwith %}
+            {% else %}
+                <li>You have no bookmarks yet.</li>
+            {% endif %}
+
+        </header>
+
+    </article>
+{% endblock %}
