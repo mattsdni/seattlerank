@@ -22,15 +22,26 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def insert_data():
-    google = Company(name='Google', website='www.google.com', twitter_handle='google', logo='http://www.thelogofactory.com/wp-content/uploads/2015/09/fixed-google-logo-font.png', rank=1)
+    google = Company(name='Google', website='www.google.com', twitter_handle='google',
+                     logo='http://www.thelogofactory.com/wp-content/uploads/2015/09/fixed-google-logo-font.png', rank=1)
     db.session.add(google)
     db.session.commit()
 
     print 'Initialized the database'
 
 
+# This command updates the social media data for each company
 @manager.command
-def rank_companies():
+def update_social():
+    companies = Company.query.all()
+    for company in companies:
+        print company
+    return
+
+
+# This command will create all the companies for the first time and load their social media data too
+@manager.command
+def load_companies():
     with open('companies.csv', 'rb') as csvfile:
         spamreader = csv.reader(csvfile)
         data = []
@@ -114,11 +125,13 @@ def get_facebook_data(data):
     company_data = {}
     total = len(data)
     n = 1
+    access_token = '1748920132064104%7C8Y31q_dkRE-io-TY9L_Q5Knii0Y'
     for company in data:
         print 'fetching ' + str(n) + ' of ' + str(total)
         n += 1
 
-        url = "https://graph.facebook.com/v2.6/search?q="+company[0]+"&type=page&access_token=EAACEdEose0cBAMa0i7OALnS1LGbyAy1ItG1sh6BENtZCxFRm0lZAuo7kTXUtTZCL4aReWdaOZByuPPG5iDeZAYcYWmWnkJZCCOZB5Sh85dd3dz9CI02S7MiLjelZCujSWQuIcb8vaIst8ZBwCgKAX1miMnbxLvZBTbGG97ExbPAtJroQZDZD"
+        url = "https://graph.facebook.com/v2.6/search?q=" + company[
+            0] + "&type=page&access_token=" + access_token
         response = urllib.urlopen(url)
         data = json.loads(response.read())
         company_id = data['data']
@@ -127,7 +140,7 @@ def get_facebook_data(data):
         else:
             continue
 
-        url = "https://graph.facebook.com/v2.6/"+company_id+"/?fields=fan_count&access_token=EAACEdEose0cBAMa0i7OALnS1LGbyAy1ItG1sh6BENtZCxFRm0lZAuo7kTXUtTZCL4aReWdaOZByuPPG5iDeZAYcYWmWnkJZCCOZB5Sh85dd3dz9CI02S7MiLjelZCujSWQuIcb8vaIst8ZBwCgKAX1miMnbxLvZBTbGG97ExbPAtJroQZDZD"
+        url = "https://graph.facebook.com/v2.6/" + company_id + "/?fields=fan_count&access_token=" + access_token
         response = urllib.urlopen(url)
         data = json.loads(response.read())
         try:
@@ -145,6 +158,7 @@ def dropdb():
     if prompt_bool("Are you sure you want to delete the whole database?"):
         db.drop_all()
         print 'Database deleted'
+
 
 @manager.command
 def erasedata():

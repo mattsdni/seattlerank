@@ -8,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Freelancer - Start Bootstrap Theme</title>
+    {% block title %}
+        <title>DevHub Index</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     <!-- Custom Fonts -->
     <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
@@ -46,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">Seattle Rank</a>
+            <a class="navbar-brand" href="#page-top">DevHub Index</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,13 +58,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Portfolio</a>
+                    <a href="#ranking">Ranking</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#about">About</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">Contact</a>
                 </li>
             </ul>
         </div>
@@ -71,100 +70,36 @@
     <!-- /.container-fluid -->
 </nav>
 
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <img class="img-responsive" src="{{ url_for('static', filename='img/seattle-skyline.svg') }}" alt="">
-                <div class="intro-text">
-                    <span class="name">Seattle's Top Startups</span>
-                    <span class="skills"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Portfolio Grid Section -->
-<section id="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Ranking</h2>
-                <br>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-0 col-lg-2"></div>
-            <div class="col-sm-12 col-lg-8" id="startup-list">
-                <div class="list-group">
-                    {% for company in companies %}
-
-                    <div class="list-group-item">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="{{ company.logo }}">
-                            </div>
-                            <div class="col-sm-3" style="padding-top: 2rem;">
-                                <span class="company-name">{{ company.name }}</span>
-                            </div>
-                            <div class="col-sm-2" style="padding-top: 3rem;">
-                                <a href="{{ company.website }}">Website</a>
-                            </div>
-                            <div class="col-sm-2" style="padding-top: 2rem;">
-                                <span class="rank">{{ company.twitter_followers|millify }}</span>
-                            </div>
-                            <div class="col-sm-2" style="padding-top: 2rem;">
-                                <span class="rank">{{ company.fb_page_likes|millify }}</span>
-                            </div>
-                        </div>
+{% block header %}
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="{{ url_for('static', filename='img/seattle-skyline.svg') }}"
+                         alt="">
+                    <div class="intro-text">
+                        <span class="name">Web Experience Management</span>
+                        <span class="skills"></span>
                     </div>
-
-                    {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </header>
+{% endblock %}
 
+{% block content %}
 
-<script type="text/javascript">
-    window.onload = function () {
-        init()
-    };
-    var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1P9h67B9Te1izPP2PUYlDn2cTe2Z4egy8kN0YWxN1jfc/pubhtml';
-    {#    function init() {#}
-    {#        Tabletop.init( { key: public_spreadsheet_url,#}
-    {#            callback: showData,#}
-    {#            simpleSheet: true } )#}
-    {#    }#}
-    function showData(data, tabletop) {
-        //JSON.stringify(data)
-        var $table = $("<div class='list-group'></div>");
-        for (var i = 0; i < data.length; i++) {
-            var comp = data[i];
-            var $line = $("<div class='list-group-item'></div>");
-            var $line_row = $("<div class='row'></div>");
-            $line.append($line_row);
-            $line_row.append($("<div class='col-sm-3'></div>").html("<img src='" + comp.logo + "' style='height:6em'>"));
-            $line_row.append($("<div class='col-sm-4' style='padding-top: 2rem;'></div>").html("<span class='company-name'>" + comp.name + "</span>"));
-            $line_row.append($("<div class='col-sm-3' style='padding-top: 3rem;'></div>").html("<a href='" + comp.blog + "'>Website</a>"));
-            $line_row.append($("<div class='col-sm-2' style='padding-top: 2rem;'></div>").html("<span class='rank'>" + comp.rank + "</span>"));
-            $table.append($line);
-        }
-        $table.appendTo($("#startup-list"));
-    }
-</script>
+{% endblock %}
 
 <!-- Footer -->
-<footer class="text-center">
+<footer class="text-center" id="about">
     <div class="footer-above">
         <div class="container">
             <div class="row">
                 <div class="footer-col col-md-4">
                     <h3>Location</h3>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    <p>2101 4th Ave<br>Seattle, WA 98121</p>
                 </div>
                 <div class="footer-col col-md-4">
                     <h3>Around the Web</h3>
@@ -187,9 +122,11 @@
                     </ul>
                 </div>
                 <div class="footer-col col-md-4">
-                    <h3>About Seattle Rank</h3>
-                    <p>Lorem ipsum dolor sit amet, per in vivendo voluptua insolens. Ullum cetero liberavisse
-                        ne pri, nam eu moderatius argumentum elaboraret, ne eam augue partem disputando.</p>
+                    <h3>About The DevHub Index</h3>
+                    <p>Wanting to create a more detailed index of companies in the same market space, DevHub
+                        sought out to build their own index, based on the social media presence of the top companies
+                        featured in the web experience management section of the Marketing Technology Landscape
+                        Supergraphic</p>
                 </div>
             </div>
         </div>
@@ -217,9 +154,6 @@
 {{ moment.include_moment() }}
 
 {% block scripts %}
-    <!-- jQuery -->
-    {#    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>#}
-
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
@@ -237,27 +171,6 @@
 
     <!-- Google Sheets Integration  -->
     <script src="{{ url_for('static', filename='js/tabletop.js') }}"></script>
-
-    <script>
-    function nFormatter(num) {
-    isNegative = false
-    if (num < 0) {
-        isNegative = true
-    }
-    num = Math.abs(num)
-    if (num >= 1000000000) {
-        formattedNumber = (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-    } else if (num >= 1000000) {
-        formattedNumber =  (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    } else  if (num >= 1000) {
-        formattedNumber =  (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-    } else {
-        formattedNumber = num;
-    }
-    if(isNegative) { formattedNumber = '-' + formattedNumber }
-    return formattedNumber;
-}
-    </script>
 
 {% endblock %}
 </body>

@@ -458,6 +458,13 @@ footer .footer-below {
     opacity: 0;
 }
 
+.rank-label {
+    display: block;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 2em;
+    color: #18bc9c;
+}
+
 .rank {
     display: block;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -482,3 +489,9 @@ footer .footer-below {
     color: black;
 }
 
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+
+  display: flex;
+  align-items: center;
+}
