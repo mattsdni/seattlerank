@@ -22,3 +22,4 @@ application = linkedin.LinkedInApplication(authentication)
 # Use the app....
 
 application.get_profile()
+
