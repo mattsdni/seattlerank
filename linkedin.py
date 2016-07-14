@@ -1,8 +1,13 @@
+something = "AQSUclIZWfLdDzCxyoDUGATEb7_Z63sGN5zJfHNbTCFg0szIolOD9BwdqOSx9sqlPQ-31VgQbx3bHQxA1h4DnP5oHjNlMDCylN47BkMKDVsf3TK23No"
+
+
 from linkedin import linkedin
 
-# Define CONSUMER_KEY, CONSUMER_SECRET,  
-# USER_TOKEN, and USER_SECRET from the credentials 
-# provided in your LinkedIn application
+CONSUMER_KEY
+CONSUMER_SECRET 
+USER_TOKEN
+USER_SECRET
+
 
 # Instantiate the developer authentication class
 
