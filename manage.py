@@ -161,7 +161,7 @@ def dropdb():
 
 
 @manager.command
-def erasedata():
+def erase_data():
     if prompt_bool("Are you sure you want to erase all data?"):
         for tbl in reversed(meta.sorted_tables):
             tbl.drop(engine)

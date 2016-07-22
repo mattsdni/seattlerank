@@ -1,5 +1,6 @@
 from . import db
 from sqlalchemy import asc, desc, func
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class Company(db.Model):
@@ -12,11 +13,14 @@ class Company(db.Model):
     rank = db.Column(db.Integer)
     fb_page_likes = db.Column(db.Integer)
 
+    @hybrid_property
+    def rank(self):
+        return self.fb_page_likes + self.twitter_followers
+
     @staticmethod
     def top(num):
-        return db.session.query(Company.name, Company.website, Company.logo,
-                                (Company.fb_page_likes + Company.twitter_followers).label("rank")).order_by(desc(
-            (Company.fb_page_likes + Company.twitter_followers))).limit(num)
+        return db.session.query(Company.name, Company.website, Company.logo, Company.rank.label("rank")).order_by(
+            desc(Company.rank)).limit(num)
 
     def __repr__(self):
         return "<Company '{}'>".format(self.name)

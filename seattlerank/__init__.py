@@ -10,8 +10,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'g3498hg4578gh4578h3f'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'seattlerank.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/seattlerank'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'seattlerank.db')
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/seattlerank'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False  # prevent annoying debug thing from breaking links
@@ -24,7 +24,7 @@ login_manager.login_view = "login"  # tells flask where to redirect if you try t
 login_manager.init_app(app)
 
 # Load debug toolbar
-toolbar = DebugToolbarExtension(app)
+#toolbar = DebugToolbarExtension(app)
 
 # make timestamps look pretty
 moment = Moment(app)
